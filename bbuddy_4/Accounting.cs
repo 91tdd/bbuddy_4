@@ -44,7 +44,14 @@ namespace bbuddy_4
             {
                 return 0;
             }
-            var days = (period.EndDate.AddDays(1) - period.StartDate).Days;
+            var effectiveEndDate = period.EndDate;
+            var effectiveStartDate = period.StartDate;
+            if (period.StartDate < budget.StartDay)
+            {
+                effectiveStartDate = budget.StartDay;
+            }
+
+            var days = (effectiveEndDate.AddDays(1) - effectiveStartDate).Days;
             return days;
         }
     }
