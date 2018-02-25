@@ -17,10 +17,15 @@ namespace bbuddy_4
             var budgets = _budgetRepo.GetAll();
             if (budgets.Any())
             {
-                var days = (endDate.AddDays(1) - startDate).Days;
-                return days;
+                return EffectiveDays(startDate, endDate);
             }
             return 0;
+        }
+
+        private static decimal EffectiveDays(DateTime startDate, DateTime endDate)
+        {
+            var days = (endDate.AddDays(1) - startDate).Days;
+            return days;
         }
     }
 }
