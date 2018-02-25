@@ -1,14 +1,17 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace bbuddy_4
 {
     [TestClass]
-    public class UnitTest1
+    public class BbuddyTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void no_budgets()
         {
+            var accounting = new Accounting();
+            var totalBudget = accounting.TotalBudget(new DateTime(2018, 3, 1), new DateTime(2018, 3, 1));
+            Assert.AreEqual(totalBudget, 0);
         }
     }
 }
