@@ -6,7 +6,7 @@ namespace bbuddy_4
     {
         public decimal TotalBudget(DateTime startDate, DateTime endDate)
         {
-            throw new NotImplementedException();
+            return 0;
         }
     }
 }
