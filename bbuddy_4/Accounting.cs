@@ -36,6 +36,10 @@ namespace bbuddy_4
 
         private static decimal EffectiveDays(Period period, Budget budget)
         {
+            if (period.StartDate > budget.EndDay)
+            {
+                return 0;
+            }
             if (period.EndDate < budget.StartDay)
             {
                 return 0;

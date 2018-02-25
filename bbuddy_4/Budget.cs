@@ -15,5 +15,14 @@ namespace bbuddy_4
                 return DateTime.ParseExact(startDayOfString, "yyyyMMdd", null);
             }
         }
+
+        public DateTime EndDay
+        {
+            get
+            {
+                var daysInMonth = DateTime.DaysInMonth(this.StartDay.Year, this.StartDay.Month);
+                return new DateTime(StartDay.Year, StartDay.Month, daysInMonth);
+            }
+        }
     }
 }
