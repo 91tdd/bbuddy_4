@@ -59,6 +59,14 @@ namespace bbuddy_4
             TotalBudgetShouldBe(1, new DateTime(2018, 4, 30), new DateTime(2018, 5, 1));
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void invalid_period()
+        {
+            GivenBudgets(new Budget { YearMonth = "201804", Amount = 30 });
+            TotalBudgetShouldBe(1, new DateTime(2018, 4, 30), new DateTime(2018, 5, 1));
+        }
+
         private void GivenBudgets(params Budget[] budgets)
         {
             _budgetRepo.GetAll().Returns(budgets.ToList());
