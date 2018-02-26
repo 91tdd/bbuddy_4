@@ -24,5 +24,14 @@ namespace bbuddy_4
                 return new DateTime(StartDay.Year, StartDay.Month, daysInMonth);
             }
         }
+
+        public int DaysInMonth
+        {
+            get
+            {
+                var daysInMonth = DateTime.DaysInMonth(this.StartDay.Year, this.StartDay.Month);
+                return daysInMonth;
+            }
+        }
     }
 }

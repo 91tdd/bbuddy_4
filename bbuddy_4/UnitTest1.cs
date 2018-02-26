@@ -74,6 +74,13 @@ namespace bbuddy_4
             TotalBudgetShouldBe(3, new DateTime(2018, 4, 1), new DateTime(2018, 4, 3));
         }
 
+        [TestMethod]
+        public void effective_amount()
+        {
+            GivenBudgets(new Budget { YearMonth = "201804", Amount = 300 });
+            TotalBudgetShouldBe(30, new DateTime(2018, 4, 1), new DateTime(2018, 4, 3));
+        }
+
         private void GivenBudgets(params Budget[] budgets)
         {
             _budgetRepo.GetAll().Returns(budgets.ToList());
