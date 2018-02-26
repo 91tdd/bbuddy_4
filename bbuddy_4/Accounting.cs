@@ -13,6 +13,34 @@ namespace bbuddy_4
 
         public DateTime StartDate { get; private set; }
         public DateTime EndDate { get; private set; }
+
+        public DateTime EffectiveEndDate(Budget budget)
+        {
+            var effectiveEndDate = EndDate > budget.LastDay ? budget.LastDay : EndDate;
+            return effectiveEndDate;
+        }
+
+        public DateTime EffectiveStartDate(Budget budget)
+        {
+            return StartDate < budget.StartDay ? budget.StartDay : StartDate;
+        }
+
+        public decimal EffectiveDays(Budget budget)
+        {
+            if (StartDate > budget.LastDay)
+            {
+                return 0;
+            }
+            if (EndDate < budget.StartDay)
+            {
+                return 0;
+            }
+            var effectiveEndDate = EffectiveEndDate(budget);
+            var effectiveStartDate = EffectiveStartDate(budget);
+
+            var days = (effectiveEndDate.AddDays(1) - effectiveStartDate).Days;
+            return days;
+        }
     }
 
     public class Accounting
@@ -29,37 +57,9 @@ namespace bbuddy_4
             var budgets = _budgetRepo.GetAll();
             if (budgets.Any())
             {
-                return EffectiveDays(new Period(startDate, endDate), budgets[0]);
+                return new Period(startDate, endDate).EffectiveDays(budgets[0]);
             }
             return 0;
-        }
-
-        private static decimal EffectiveDays(Period period, Budget budget)
-        {
-            if (period.StartDate > budget.LastDay)
-            {
-                return 0;
-            }
-            if (period.EndDate < budget.StartDay)
-            {
-                return 0;
-            }
-            var effectiveEndDate = EffectiveEndDate(period, budget);
-            var effectiveStartDate = EffectiveStartDate(period, budget);
-
-            var days = (effectiveEndDate.AddDays(1) - effectiveStartDate).Days;
-            return days;
-        }
-
-        private static DateTime EffectiveEndDate(Period period, Budget budget)
-        {
-            var effectiveEndDate = period.EndDate > budget.LastDay ? budget.LastDay : period.EndDate;
-            return effectiveEndDate;
-        }
-
-        private static DateTime EffectiveStartDate(Period period, Budget budget)
-        {
-            return period.StartDate < budget.StartDay ? budget.StartDay : period.StartDate;
         }
     }
 }
