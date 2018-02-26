@@ -45,14 +45,15 @@ namespace bbuddy_4
                 return 0;
             }
             var effectiveEndDate = period.EndDate;
-            var effectiveStartDate = period.StartDate;
-            if (period.StartDate < budget.StartDay)
-            {
-                effectiveStartDate = budget.StartDay;
-            }
+            var effectiveStartDate = EffectiveStartDate(period, budget);
 
             var days = (effectiveEndDate.AddDays(1) - effectiveStartDate).Days;
             return days;
+        }
+
+        private static DateTime EffectiveStartDate(Period period, Budget budget)
+        {
+            return period.StartDate < budget.StartDay ? budget.StartDay : period.StartDate;
         }
     }
 }
