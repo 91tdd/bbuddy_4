@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace bbuddy_4
 {
@@ -14,13 +15,7 @@ namespace bbuddy_4
         public decimal TotalBudget(DateTime startDate, DateTime endDate)
         {
             var period = new Period(startDate, endDate);
-            var budgets = _budgetRepo.GetAll();
-            var totalBudget = 0m;
-            foreach (var budget in budgets)
-            {
-                totalBudget += budget.EffectiveAmount(period);
-            }
-            return totalBudget;
+            return _budgetRepo.GetAll().Sum(b => b.EffectiveAmount(period));
         }
     }
 }
