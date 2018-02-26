@@ -16,7 +16,7 @@ namespace bbuddy_4
             }
         }
 
-        public DateTime EndDay
+        public DateTime LastDay
         {
             get
             {

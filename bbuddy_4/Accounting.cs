@@ -36,7 +36,7 @@ namespace bbuddy_4
 
         private static decimal EffectiveDays(Period period, Budget budget)
         {
-            if (period.StartDate > budget.EndDay)
+            if (period.StartDate > budget.LastDay)
             {
                 return 0;
             }
@@ -44,11 +44,17 @@ namespace bbuddy_4
             {
                 return 0;
             }
-            var effectiveEndDate = period.EndDate > budget.EndDay ? budget.EndDay : period.EndDate;
+            var effectiveEndDate = EffectiveEndDate(period, budget);
             var effectiveStartDate = EffectiveStartDate(period, budget);
 
             var days = (effectiveEndDate.AddDays(1) - effectiveStartDate).Days;
             return days;
+        }
+
+        private static DateTime EffectiveEndDate(Period period, Budget budget)
+        {
+            var effectiveEndDate = period.EndDate > budget.LastDay ? budget.LastDay : period.EndDate;
+            return effectiveEndDate;
         }
 
         private static DateTime EffectiveStartDate(Period period, Budget budget)
