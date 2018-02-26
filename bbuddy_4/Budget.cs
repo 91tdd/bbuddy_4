@@ -33,5 +33,11 @@ namespace bbuddy_4
         {
             return Amount / GetDaysInMonth();
         }
+
+        public decimal EffectiveAmount(Period period)
+        {
+            var effectiveDays = period.EffectiveDays(new Period(StartDay, LastDay));
+            return effectiveDays * DailyAmount();
+        }
     }
 }

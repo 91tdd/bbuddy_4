@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 namespace bbuddy_4
 {
@@ -16,13 +15,12 @@ namespace bbuddy_4
         {
             var period = new Period(startDate, endDate);
             var budgets = _budgetRepo.GetAll();
-            if (budgets.Any())
+            var totalBudget = 0m;
+            foreach (var budget in budgets)
             {
-                var budget = budgets[0];
-                var effectiveDays = period.EffectiveDays(new Period(budget.StartDay, budget.LastDay));
-                return effectiveDays * budget.DailyAmount();
+                totalBudget += budget.EffectiveAmount(period);
             }
-            return 0;
+            return totalBudget;
         }
     }
 }
