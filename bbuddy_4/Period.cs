@@ -6,6 +6,10 @@ namespace bbuddy_4
     {
         public Period(DateTime startDate, DateTime endDate)
         {
+            if (endDate < startDate)
+            {
+                throw new ArgumentException();
+            }
             StartDate = startDate;
             EndDate = endDate;
         }
