@@ -19,9 +19,8 @@ namespace bbuddy_4
             if (budgets.Any())
             {
                 var budget = budgets[0];
-                var dailyAmount = budget.Amount / budget.DaysInMonth;
                 var effectiveDays = period.EffectiveDays(new Period(budget.StartDay, budget.LastDay));
-                return effectiveDays * dailyAmount;
+                return effectiveDays * budget.DailyAmount();
             }
             return 0;
         }

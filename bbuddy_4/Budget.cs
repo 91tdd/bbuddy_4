@@ -20,18 +20,18 @@ namespace bbuddy_4
         {
             get
             {
-                var daysInMonth = DateTime.DaysInMonth(this.StartDay.Year, this.StartDay.Month);
-                return new DateTime(StartDay.Year, StartDay.Month, daysInMonth);
+                return new DateTime(StartDay.Year, StartDay.Month, GetDaysInMonth());
             }
         }
 
-        public int DaysInMonth
+        private int GetDaysInMonth()
         {
-            get
-            {
-                var daysInMonth = DateTime.DaysInMonth(this.StartDay.Year, this.StartDay.Month);
-                return daysInMonth;
-            }
+            return DateTime.DaysInMonth(this.StartDay.Year, this.StartDay.Month);
+        }
+
+        public int DailyAmount()
+        {
+            return Amount / GetDaysInMonth();
         }
     }
 }
